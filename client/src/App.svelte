@@ -27,7 +27,7 @@
 			value: typeOfTransaction === "+" ? input : input * -1,
 		};
 		const response = await axios.post(
-			"http://localhost:3000/api/transactions",
+			"/api/transactions",
 			transaction
 		);
 		$transactions = [response.data, ...$transactions];
@@ -38,7 +38,7 @@
 	const removeTransaction = async (id) => {
 			loading = true
 		const response = await axios.delete(
-			`http://localhost:3000/api/transactions/${id}`
+			`/api/transactions/${id}`
 		);
 		if (response.data.id === id) {
 			$transactions = $transactions.filter((t) => t._id !== id);
@@ -95,7 +95,7 @@
 	{#each $sortedTransactions as transaction (transaction._id)}
 		<Transaction {transaction} {removeTransaction} />
 	{/each} 
-	{:else if $transactions.length === 0}
+	{:else if !loading}
 		<div class="notification is-info is-light">
 			Add Your First Transaction
 		</div>
