@@ -15,7 +15,7 @@
 	onMount(async () => {
 			loading = true
 		const { data } = await axios.get(
-			"http://localhost:3000/api/transactions"
+			"/api/transactions"
 		);
 		$transactions = data;
 			loading = false
